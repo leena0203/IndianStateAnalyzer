@@ -10,6 +10,7 @@ class IndianStateCensusTest {
 	String IndiaStateCensus = "C:\\Users\\leena\\eclipse-workspace\\IndianStateCensus\\IndiaStateCensusData.csv";
 	String	Incorrect_CSVFile = "C:\\Users\\leena\\eclipse-workspace\\Indian StateCensus\\IndiaStateCensusData.csv";
 	String	Incorrect_CSVFile_Path = "C:\\Users\\leena\\eclipse-workspace\\IndiaStateCensusData.txt";
+	String  Incorrect_Delimiter = "C:\\Users\\leena\\eclipse-workspace\\indiastatecensusdata.csv";
 
 	/**
 	 * UC1_TC 1.1_Returns number of records in datacsv file
@@ -51,6 +52,22 @@ class IndianStateCensusTest {
 		int count = 0;
 		try {
 			count = test.loadStateCSVData(Incorrect_CSVFile_Path);
+		} catch (CensusAnalyserExecption e) {
+			//e.printStackTrace();
+			assertEquals(CensusAnalyserExecption.ExceptionType.INCORRECT_FILE, e.type);
+		}
+	}
+	
+	/**
+	 * UC1_TC 1.4_when CSV file is passed properly but wrong delimiter is used
+	 * @throws IOException
+	 */
+	@Test
+	void givenWrongDelimiter_ReturnsCustomException() throws IOException {
+		StateCensusAnalyser test = new StateCensusAnalyser();
+		int count = 0;
+		try {
+			count = test.loadStateCSVData(Incorrect_Delimiter);
 		} catch (CensusAnalyserExecption e) {
 			//e.printStackTrace();
 			assertEquals(CensusAnalyserExecption.ExceptionType.INCORRECT_FILE, e.type);
