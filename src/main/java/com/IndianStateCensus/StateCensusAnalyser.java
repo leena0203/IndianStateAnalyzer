@@ -22,12 +22,8 @@ public class StateCensusAnalyser {
 public int loadStateCSVData(String fileName) throws CensusAnalyserExecption, IOException{
 	try {
 		Reader read = Files.newBufferedReader(Paths.get(fileName));
-		@SuppressWarnings({ "unchecked", "rawtypes" })
-		CsvToBeanBuilder<CSVStateCensus> csvToBeanBuilder = new CsvToBeanBuilder(read);
-		csvToBeanBuilder.withType(CSVStateCensus.class);
-		csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
-		CsvToBean<CSVStateCensus> csvToBean = csvToBeanBuilder.build();
-		Iterator<CSVStateCensus> censusIterator = csvToBean.iterator();
+		Iterator<CSVStateCensus> stateCensusIterator = this.getCSVFileIterator(read, CSVStateCensus.class);
+		Iterator<CSVStateCensus> censusIterator = stateCensusIterator;
 		int numOfRecord = 0;
 		while (censusIterator.hasNext()) {
 			numOfRecord++;
@@ -52,12 +48,8 @@ public int loadStateCSVData(String fileName) throws CensusAnalyserExecption, IOE
 public int loadStateCodeCSVData(String fileName) throws CensusAnalyserExecption, IOException{
 	try {
 		Reader read = Files.newBufferedReader(Paths.get(fileName));
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		CsvToBeanBuilder<CSVStates> csvToBeanBuilder = new CsvToBeanBuilder(read);
-		csvToBeanBuilder.withType(CSVStates.class);
-		csvToBeanBuilder.withIgnoreLeadingWhiteSpace(true);
-		CsvToBean<CSVStates> csvToBean = csvToBeanBuilder.build();
-		Iterator<CSVStates> censusIterator = csvToBean.iterator();
+		Iterator<CSVStates> stateCodeIterator = this.getCSVFileIterator(read, CSVStates.class);
+		Iterator<CSVStates> censusIterator = stateCodeIterator;
 		int numOfRecord = 0;
 		while (censusIterator.hasNext()) {
 			numOfRecord++;
