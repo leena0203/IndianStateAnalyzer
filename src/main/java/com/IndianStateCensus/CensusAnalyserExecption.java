@@ -3,7 +3,7 @@ package com.IndianStateCensus;
 @SuppressWarnings("serial")
 public class CensusAnalyserExecption extends Exception {
 	public enum ExceptionType {
-		NO_FILE, INCORRECT_FILE
+		NO_FILE, INCORRECT_FILE, UNABLE_TO_PARSE
 	}
 
 	public ExceptionType type;
