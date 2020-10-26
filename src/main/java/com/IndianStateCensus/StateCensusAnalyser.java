@@ -18,8 +18,9 @@ public class StateCensusAnalyser {
 	 * @return
 	 * @throws CensusAnalyserExecption
 	 * @throws IOException
+	 * @throws CSVBuilderExecption 
 	 */
-	public int loadStateCSVData(String fileName) throws CensusAnalyserExecption, IOException{
+	public int loadStateCSVData(String fileName) throws CensusAnalyserExecption, IOException, CSVBuilderExecption{
 		try {
 			Reader read = Files.newBufferedReader(Paths.get(fileName));
 		    ICSVBuilder csv = CSVBuilderFactory.createCSVBuilder();
@@ -39,8 +40,9 @@ public class StateCensusAnalyser {
 	 * @return
 	 * @throws CensusAnalyserExecption
 	 * @throws IOException
+	 * @throws CSVBuilderExecption 
 	 */
-	public int loadStateCodeCSVData(String fileName) throws CensusAnalyserExecption, IOException{
+	public int loadStateCodeCSVData(String fileName) throws CensusAnalyserExecption, IOException, CSVBuilderExecption{
 		try {
 			Reader read = Files.newBufferedReader(Paths.get(fileName));
 			ICSVBuilder csv = CSVBuilderFactory.createCSVBuilder();

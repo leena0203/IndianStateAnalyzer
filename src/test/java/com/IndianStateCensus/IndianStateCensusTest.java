@@ -30,10 +30,11 @@ class IndianStateCensusTest {
 	/**
 	 * UC1_TC 1.2_Returns custom exception when incorrect path is input
 	 * @throws IOException
+	 * @throws CSVBuilderExecption 
 	 */
 
 	@Test
-	void givenWrongTypeOfFile_ReturnsCustomException() throws IOException {
+	void givenWrongTypeOfFile_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
 		int count = 0;
 		try {
@@ -47,9 +48,10 @@ class IndianStateCensusTest {
 	/**
 	 * UC1_TC 1.3_Returns custom exception when incorrect extension given
 	 * @throws IOException
+	 * @throws CSVBuilderExecption 
 	 */
 	@Test
-	void givenWrongPath_ReturnsCustomException() throws IOException {
+	void givenWrongPath_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
 		int count = 0;
 		try {
@@ -63,9 +65,10 @@ class IndianStateCensusTest {
 	/**
 	 * UC1_TC 1.4_when CSV file is passed properly but wrong delimiter is used
 	 * @throws IOException
+	 * @throws CSVBuilderExecption 
 	 */
 	@Test
-	void givenWrongDelimiter_ReturnsCustomException() throws IOException {
+	void givenWrongDelimiter_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
 		int count = 0;
 		try {
@@ -79,9 +82,10 @@ class IndianStateCensusTest {
 	/**
 	 * UC1_TC 1.5_when Wrong header csv file is passed throws custom exception
 	 * @throws IOException
+	 * @throws CSVBuilderExecption 
 	 */
 	@Test
-	void givenWrongHeaderFile_ReturnsCustomException() throws IOException {
+	void givenWrongHeaderFile_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
 		int count = 0;
 		try {
@@ -108,10 +112,11 @@ class IndianStateCensusTest {
 	/**
 	 * UC2_TC 1.2_Returns custom exception when incorrect path is input
 	 * @throws IOException
+	 * @throws CSVBuilderExecption 
 	 */
 
 	@Test
-	void givenWrongTypeOfFile_ForState_ReturnsCustomException() throws IOException {
+	void givenWrongTypeOfFile_ForState_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
 		int count = 0;
 		try {
@@ -125,9 +130,10 @@ class IndianStateCensusTest {
 	/**
 	 * UC2_TC 1.3_Returns custom exception when incorrect extension given
 	 * @throws IOException
+	 * @throws CSVBuilderExecption 
 	 */
 	@Test
-	void givenWrongPath_ForStateCode_ReturnsCustomException() throws IOException {
+	void givenWrongPath_ForStateCode_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
 		int count = 0;
 		try {
@@ -141,9 +147,10 @@ class IndianStateCensusTest {
 	/**
 	 * UC2_TC 1.4_when CSV file is passed properly but wrong delimiter is used
 	 * @throws IOException
+	 * @throws CSVBuilderExecption 
 	 */
 	@Test
-	void givenWrongDelimiter_ForStateCode_ReturnsCustomException() throws IOException {
+	void givenWrongDelimiter_ForStateCode_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
 		int count = 0;
 		try {
@@ -157,9 +164,10 @@ class IndianStateCensusTest {
 	/**
 	 * UC1_TC 1.5_when Wrong header csv file is passed throws custom exception
 	 * @throws IOException
+	 * @throws CSVBuilderExecption 
 	 */
 	@Test
-	void givenWrongHeaderFile_ForStateCode_ReturnsCustomException() throws IOException {
+	void givenWrongHeaderFile_ForStateCode_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
 		int count = 0;
 		try {
