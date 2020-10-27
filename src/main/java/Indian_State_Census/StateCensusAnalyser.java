@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.Iterator;
+import java.util.List;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -24,12 +25,12 @@ public class StateCensusAnalyser {
 	 * @throws CSVBuilderExecption 
 	 */
 	public int loadStateCSVData(String fileName) throws CensusAnalyserExecption, IOException, CSVBuilderExecption{
+		
 		try {
 			Reader read = Files.newBufferedReader(Paths.get(fileName));
 		    ICSVBuilder csv = CSVBuilderFactory.createCSVBuilder();
-			Iterator<CSVStateCensus> stateCensusIterator = csv.getCSVFileIterator(read, CSVStateCensus.class);
-			int numOfRecord = this.getNumOfRecord(stateCensusIterator);
-			return numOfRecord;
+			List<CSVStateCensus> stateCensusList = csv.getCSVFileList(read, CSVStateCensus.class);
+			return stateCensusList.size();
 		} catch (RuntimeException e) {
 			throw new CensusAnalyserExecption(e.getMessage(), CensusAnalyserExecption.ExceptionType.INCORRECT_FILE);
 		} catch (NoSuchFileException e) {
@@ -66,4 +67,5 @@ public class StateCensusAnalyser {
 		}
 		return numOfRecord;
 	}
+	
 }
