@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
+import com.google.gson.Gson;
+
 import CSVReader.CSVBuilderExecption;
 
 class IndianStateCensusTest {
@@ -16,9 +18,7 @@ class IndianStateCensusTest {
 	String Incorrect_header = "C:\\Users\\leena\\eclipse-workspace\\IndianStateCensus\\USCensusData.csv";
 	String IndiaStateCode = "C:\\Users\\leena\\eclipse-workspace\\IndianStateCensus\\StateCode.csv";
 	String Incorrect_Delimiter_StateCode = "C:\\Users\\leena\\eclipse-workspace\\statecode.csv";
-	/**
-	 * UC1_TC 1.1_Returns number of records in datacsv file
-	 */
+
 	@Test
 	void givenRightPath_ReturnsNumOfRecord() {
 		StateCensusAnalyser test = new StateCensusAnalyser();
@@ -29,15 +29,10 @@ class IndianStateCensusTest {
 		}
 	}
 
-	/**
-	 * UC1_TC 1.2_Returns custom exception when incorrect path is input
-	 * @throws IOException
-	 * @throws CSVBuilderExecption 
-	 */
-
 	@Test
 	void givenWrongTypeOfFile_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
+		@SuppressWarnings("unused")
 		int count = 0;
 		try {
 			count = test.loadStateCSVData(Incorrect_CSVFile);
@@ -47,14 +42,10 @@ class IndianStateCensusTest {
 		}
 	}
 
-	/**
-	 * UC1_TC 1.3_Returns custom exception when incorrect extension given
-	 * @throws IOException
-	 * @throws CSVBuilderExecption 
-	 */
 	@Test
 	void givenWrongPath_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
+		@SuppressWarnings("unused")
 		int count = 0;
 		try {
 			count = test.loadStateCSVData(Incorrect_CSVFile_Path);
@@ -64,14 +55,10 @@ class IndianStateCensusTest {
 		}
 	}
 
-	/**
-	 * UC1_TC 1.4_when CSV file is passed properly but wrong delimiter is used
-	 * @throws IOException
-	 * @throws CSVBuilderExecption 
-	 */
 	@Test
 	void givenWrongDelimiter_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
+		@SuppressWarnings("unused")
 		int count = 0;
 		try {
 			count = test.loadStateCSVData(Incorrect_Delimiter);
@@ -81,14 +68,10 @@ class IndianStateCensusTest {
 		}
 	}
 
-	/**
-	 * UC1_TC 1.5_when Wrong header csv file is passed throws custom exception
-	 * @throws IOException
-	 * @throws CSVBuilderExecption 
-	 */
 	@Test
 	void givenWrongHeaderFile_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
+		@SuppressWarnings("unused")
 		int count = 0;
 		try {
 			count = test.loadStateCSVData(Incorrect_header);
@@ -98,9 +81,6 @@ class IndianStateCensusTest {
 		}
 	}
 
-	/**
-	 *UC2_TC 1.1_Returns number of records in Codecsv file
-	 */
 	@Test
 	void givenRightPath_ForStateCode_ReturnsNumOfRecord() {
 		StateCensusAnalyser test = new StateCensusAnalyser();
@@ -111,15 +91,11 @@ class IndianStateCensusTest {
 		}
 	}
 
-	/**
-	 * UC2_TC 1.2_Returns custom exception when incorrect path is input
-	 * @throws IOException
-	 * @throws CSVBuilderExecption 
-	 */
 
 	@Test
 	void givenWrongTypeOfFile_ForState_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
+		@SuppressWarnings("unused")
 		int count = 0;
 		try {
 			count = test.loadStateCSVData(Incorrect_CSVFile);
@@ -129,14 +105,10 @@ class IndianStateCensusTest {
 		}
 	}
 
-	/**
-	 * UC2_TC 1.3_Returns custom exception when incorrect extension given
-	 * @throws IOException
-	 * @throws CSVBuilderExecption 
-	 */
 	@Test
 	void givenWrongPath_ForStateCode_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
+		@SuppressWarnings("unused")
 		int count = 0;
 		try {
 			count = test.loadStateCSVData(Incorrect_CSVFile_Path);
@@ -146,14 +118,10 @@ class IndianStateCensusTest {
 		}
 	}
 
-	/**
-	 * UC2_TC 1.4_when CSV file is passed properly but wrong delimiter is used
-	 * @throws IOException
-	 * @throws CSVBuilderExecption 
-	 */
 	@Test
 	void givenWrongDelimiter_ForStateCode_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
+		@SuppressWarnings("unused")
 		int count = 0;
 		try {
 			count = test.loadStateCSVData(Incorrect_Delimiter_StateCode);
@@ -163,14 +131,10 @@ class IndianStateCensusTest {
 		}
 	}
 
-	/**
-	 * UC1_TC 1.5_when Wrong header csv file is passed throws custom exception
-	 * @throws IOException
-	 * @throws CSVBuilderExecption 
-	 */
 	@Test
 	void givenWrongHeaderFile_ForStateCode_ReturnsCustomException() throws IOException, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
+		@SuppressWarnings("unused")
 		int count = 0;
 		try {
 			count = test.loadStateCSVData(Incorrect_header);
@@ -178,6 +142,22 @@ class IndianStateCensusTest {
 			//e.printStackTrace();
 			assertEquals(CensusAnalyserExecption.ExceptionType.INCORRECT_FILE, e.type);
 		}
+	}
+
+	@Test
+	void givenIndianCensusData_whenSortedOnState_ReturnStartState() throws IOException, CSVBuilderExecption, CensusAnalyserExecption {
+		StateCensusAnalyser test = new StateCensusAnalyser();
+		String sortedCensusData = test.getStateWiseSortedCensusData(IndiaStateCensus);
+		CSVStateCensus[] censusCSV =new Gson().fromJson(sortedCensusData, CSVStateCensus[].class);
+		assertEquals("Andhra Pradesh", censusCSV[0].state);	
+	}
+	
+	@Test
+	void givenIndianCensusData_whenSortedOnState_ReturnEndState() throws IOException, CSVBuilderExecption, CensusAnalyserExecption {
+		StateCensusAnalyser test = new StateCensusAnalyser();
+		String sortedCensusData = test.getStateWiseSortedCensusData(IndiaStateCensus);
+		CSVStateCensus[] censusCSV =new Gson().fromJson(sortedCensusData, CSVStateCensus[].class);
+		assertEquals("West Bengal", censusCSV[censusCSV.length - 1].state);	
 	}
 }
 

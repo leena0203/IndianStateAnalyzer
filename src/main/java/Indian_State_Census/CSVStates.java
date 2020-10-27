@@ -3,22 +3,15 @@ package Indian_State_Census;
 import com.opencsv.bean.CsvBindByName;
 
 public class CSVStates {
-	@CsvBindByName(column = "State")
+	@CsvBindByName(column = "State Name",required = true)
 	public String state;
-
-	@CsvBindByName(column = "Population", required = true)
-	public String population;
-
-	@CsvBindByName(column = "AreaInSqKm")
-	public String areaInSqKm;
-
-	@CsvBindByName(column = "DensityPerSqKm", required = true)
-	public String densityPerSqKm;
 	
+	@CsvBindByName(column = "StateCode",required = true)
+	public String stateCode;
+
 	@Override
 	public String toString() {
-		return "CSVStateCensus [state=" + state + ", population=" + population + ", areaInSqKm=" + areaInSqKm
-				+ ", densityPerSqKm=" + densityPerSqKm + "]";
+		return "StateCodeCSV [state=" + state + ", stateCode=" + stateCode + "]";
 	}
 }
 
