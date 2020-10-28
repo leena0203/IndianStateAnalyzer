@@ -2,7 +2,7 @@ package Indian_State_Census;
 
 import com.opencsv.bean.CsvBindByName;
 
-public class CSVStates {
+public class StateCodeCSV {
 	@CsvBindByName(column = "State Name",required = true)
 	public String state;
 	
@@ -14,4 +14,3 @@ public class CSVStates {
 		return "StateCodeCSV [state=" + state + ", stateCode=" + stateCode + "]";
 	}
 }
-
