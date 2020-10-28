@@ -88,7 +88,7 @@ public class StateCensusAnalyser {
 	}
 
 	private<E> void sort(List<E> list, Comparator<E> censusComparator) {
-		for (int i =0; i<list.size()-1; i++) {
+		for (int i =0; i<list.size(); i++) {
 			for(int j =0; j<list.size()- i -1; j++) {
 				E census1 = list.get(j);
 				E census2 = list.get(j+1);
@@ -114,7 +114,7 @@ public class StateCensusAnalyser {
 		System.out.println("The state is: "+sortedStateCodeJson);
 		return sortedStateCodeJson;
 	}
-	
+
 	/**
 	 * UC5_Sort according Population
 	 * @return
@@ -125,11 +125,9 @@ public class StateCensusAnalyser {
 			throw new CensusAnalyserExecption("No Census Data", CensusAnalyserExecption.ExceptionType.NO_CENSUS_DATA);
 		}
 		Comparator<CSVStateCensus> censusComparator = Comparator.comparing(census -> census.population);
-		this.sort(stateCensusList,censusComparator);
+		this.sort(stateCensusList,censusComparator.reversed());
 		String sortedPopulation = new Gson().toJson(stateCensusList);
 		System.out.println("Population Sorted: "+sortedPopulation);
 		return sortedPopulation;
 	}
-
-
 }

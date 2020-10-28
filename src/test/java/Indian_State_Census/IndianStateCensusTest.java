@@ -174,22 +174,22 @@ class IndianStateCensusTest {
 		assertEquals("WB", censusCSV[censusCSV.length - 1].stateCode);
 	}
 	@Test
-	public void givenIndianCensusData_WhenSortedOnPopulation_ShouldReturnStartState()
+	public void givenIndianCensusData_WhenSortedOnPopulation_ShouldReturnMostlyPopulated()
 			throws IOException, CensusAnalyserExecption, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
 		test.loadStateCSVData(IndiaStateCensus);
 		String sortedPopulation = test.getPopulationWiseSortedData();
 		CSVStateCensus[] censusCSV = new Gson().fromJson(sortedPopulation, CSVStateCensus[].class);
-		assertEquals("Uttarakhand", censusCSV[0].state);
+		assertEquals("West Bengal", censusCSV[0].state);
 	}
 	@Test
-	public void givenIndianCensusData_WhenSortedOnPopulation_ShouldReturnEndState()
+	public void givenIndianCensusData_WhenSortedOnPopulation_ShouldReturnLeastPopulated()
 			throws IOException, CensusAnalyserExecption, CSVBuilderExecption {
 		StateCensusAnalyser test = new StateCensusAnalyser();
 		test.loadStateCSVData(IndiaStateCensus);
 		String sortedPopulation = test.getPopulationWiseSortedData();
 		CSVStateCensus[] censusCSV = new Gson().fromJson(sortedPopulation, CSVStateCensus[].class);
-		assertEquals("West Bengal", censusCSV[censusCSV.length - 1].state);
+		assertEquals("Uttarakhand", censusCSV[censusCSV.length - 1].state);
 	}
 }
 
