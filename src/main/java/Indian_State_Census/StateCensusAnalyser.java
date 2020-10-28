@@ -99,7 +99,11 @@ public class StateCensusAnalyser {
 			}
 		}
 	}
-
+	/**
+	 * UC4_Sort according state code.
+	 * @return
+	 * @throws CensusAnalyserExecption
+	 */
 	public String getStateCodeWiseSortedCensusData() throws CensusAnalyserExecption{
 		if (stateCodeCSVList.size()== 0 || stateCodeCSVList == null) {
 			throw new CensusAnalyserExecption("No Census Data", CensusAnalyserExecption.ExceptionType.NO_CENSUS_DATA);
@@ -110,5 +114,22 @@ public class StateCensusAnalyser {
 		System.out.println("The state is: "+sortedStateCodeJson);
 		return sortedStateCodeJson;
 	}
+	
+	/**
+	 * UC5_Sort according Population
+	 * @return
+	 * @throws CensusAnalyserExecption
+	 */
+	public String getPopulationWiseSortedData() throws CensusAnalyserExecption{
+		if (stateCensusList.size()== 0 || stateCensusList == null) {
+			throw new CensusAnalyserExecption("No Census Data", CensusAnalyserExecption.ExceptionType.NO_CENSUS_DATA);
+		}
+		Comparator<CSVStateCensus> censusComparator = Comparator.comparing(census -> census.population);
+		this.sort(stateCensusList,censusComparator);
+		String sortedPopulation = new Gson().toJson(stateCensusList);
+		System.out.println("Population Sorted: "+sortedPopulation);
+		return sortedPopulation;
+	}
+
 
 }
