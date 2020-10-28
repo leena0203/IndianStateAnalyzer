@@ -16,7 +16,9 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import CSVReader.CSVBuilderExecption;
 import CSVReader.ICSVBuilder;
 
+@SuppressWarnings("unused")
 public class StateCensusAnalyser {
+	List<CSVStateCensus> stateCensusList = null;
 
 	/**
 	 * UC1_Load StateCSVData
@@ -27,11 +29,11 @@ public class StateCensusAnalyser {
 	 * @throws CSVBuilderExecption 
 	 */
 	public int loadStateCSVData(String fileName) throws CensusAnalyserExecption, IOException, CSVBuilderExecption{
-		
+
 		try {
 			Reader read = Files.newBufferedReader(Paths.get(fileName));
-		    ICSVBuilder csv = CSVBuilderFactory.createCSVBuilder();
-			List<CSVStateCensus> stateCensusList = csv.getCSVFileList(read, CSVStateCensus.class);
+			ICSVBuilder csv = CSVBuilderFactory.createCSVBuilder();
+			stateCensusList = csv.getCSVFileList(read, CSVStateCensus.class);
 			return stateCensusList.size();
 		} catch (RuntimeException e) {
 			throw new CensusAnalyserExecption(e.getMessage(), CensusAnalyserExecption.ExceptionType.INCORRECT_FILE);
@@ -51,7 +53,9 @@ public class StateCensusAnalyser {
 	public int loadStateCodeCSVData(String fileName) throws CensusAnalyserExecption, IOException, CSVBuilderExecption{
 		try {
 			Reader read = Files.newBufferedReader(Paths.get(fileName));
+			@SuppressWarnings("rawtypes")
 			ICSVBuilder csv = CSVBuilderFactory.createCSVBuilder();
+			@SuppressWarnings("unchecked")
 			Iterator<CSVStates> stateCodeIterator = csv.getCSVFileIterator(read, CSVStates.class);
 			int numOfRecord = this.getNumOfRecord(stateCodeIterator);
 			return numOfRecord;
@@ -65,29 +69,33 @@ public class StateCensusAnalyser {
 		int numOfRecord = 0;
 		while (iterator.hasNext()) {
 			numOfRecord++;
+			@SuppressWarnings("unused")
 			E censusData = iterator.next();
 		}
 		return numOfRecord;
 	}
-
-	public String getStateWiseSortedCensusData(String fileName) throws CSVBuilderExecption, IOException, CensusAnalyserExecption {
-		try {
-			Reader read = Files.newBufferedReader(Paths.get(fileName));
-		    ICSVBuilder csv = CSVBuilderFactory.createCSVBuilder();
-			List<CSVStateCensus> stateCensusList = csv.getCSVFileList(read, CSVStateCensus.class);
+	/**
+	 * UC3_Return sorted list using json
+	 * @param fileName
+	 * @return
+	 * @throws CSVBuilderExecption
+	 * @throws IOException
+	 * @throws CensusAnalyserExecption
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String getStateWiseSortedCensusData() throws CensusAnalyserExecption{
+		if (stateCensusList.size()== 0 || stateCensusList == null) {
+			throw new CensusAnalyserExecption("No Census Data", CensusAnalyserExecption.ExceptionType.NO_CENSUS_DATA);
+		}
 			Comparator<CSVStateCensus> censusComparator = Comparator.comparing(census -> census.state);
-			this.sort(stateCensusList, censusComparator);
+			this.sort(censusComparator);
 			String sortedStateCensusJson = new Gson().toJson(stateCensusList);
 			System.out.println(sortedStateCensusJson);
 			return sortedStateCensusJson;
-		} catch (RuntimeException e) {
-			throw new CensusAnalyserExecption(e.getMessage(), CensusAnalyserExecption.ExceptionType.INCORRECT_FILE);
-		} catch (NoSuchFileException e) {
-			throw new CensusAnalyserExecption(e.getMessage(), CensusAnalyserExecption.ExceptionType.NO_FILE);
-		}
+		
 	}
 
-	private void sort(List<CSVStateCensus> stateCensusList, Comparator<CSVStateCensus> censusComparator) {
+	private void sort(Comparator<CSVStateCensus> censusComparator) {
 		for (int i =0; i<stateCensusList.size()-1; i++) {
 			for(int j =0; j<stateCensusList.size()- i -1; j++) {
 				CSVStateCensus census1 = stateCensusList.get(j);
@@ -99,5 +107,5 @@ public class StateCensusAnalyser {
 			}
 		}
 	}
-	
+
 }
